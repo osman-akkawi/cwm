@@ -29,7 +29,7 @@ app.prepare().then(() => {
   const io = new Server(httpServer, {
     cors: {
       origin: process.env.NODE_ENV === 'production' 
-        ? [process.env.FRONTEND_URL || "https://*.railway.app"] 
+        ? [process.env.FRONTEND_URL || "https://*.fly.dev", "https://*.fly.app"] 
         : ["http://localhost:3000", "http://127.0.0.1:3000"],
       methods: ["GET", "POST"],
       credentials: true
@@ -198,7 +198,7 @@ app.prepare().then(() => {
       console.error(err);
       process.exit(1);
     })
-    .listen(port, () => {
-      console.log(`> Ready on http://localhost:${port}`);
+    .listen(port, '0.0.0.0', () => {
+      console.log(`> Ready on http://0.0.0.0:${port}`);
     });
 });
